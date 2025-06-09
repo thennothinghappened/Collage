@@ -16,7 +16,7 @@ function __CollageStaticGroupClass(_collageInstance, _prefetch = false, _removeS
 		_paths[_i] = _filepath;
 		_texturePages[_i].CheckSurface();
 		var _surf = _texturePages[_i].GetSurface();
-		_global.__CollageSurfaceSaveCallback(_surf, _filepath);
+		surface_save(_surf, _filepath);
 		array_push(_cache, _filepath);
 	}
 	

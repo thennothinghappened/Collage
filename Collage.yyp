@@ -196,8 +196,6 @@
     {"id":{"name":"CollageRenderPipeline","path":"scripts/CollageRenderPipeline/CollageRenderPipeline.yy",},},
     {"id":{"name":"CollageRestoreGPUState","path":"scripts/CollageRestoreGPUState/CollageRestoreGPUState.yy",},},
     {"id":{"name":"CollageStaticCacheClear","path":"scripts/CollageStaticCacheClear/CollageStaticCacheClear.yy",},},
-    {"id":{"name":"CollageStaticSurfaceGetSave","path":"scripts/CollageStaticSurfaceGetSave/CollageStaticSurfaceGetSave.yy",},},
-    {"id":{"name":"CollageStaticSurfaceSetSave","path":"scripts/CollageStaticSurfaceSetSave/CollageStaticSurfaceSetSave.yy",},},
     {"id":{"name":"CollageSterlizeGPUState","path":"scripts/CollageSterlizeGPUState/CollageSterlizeGPUState.yy",},},
     {"id":{"name":"CollageTextureFlush","path":"scripts/CollageTextureFlush/CollageTextureFlush.yy",},},
     {"id":{"name":"draw_image_ext","path":"scripts/draw_image_ext/draw_image_ext.yy",},},
