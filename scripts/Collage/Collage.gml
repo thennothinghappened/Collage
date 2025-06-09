@@ -484,7 +484,7 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 	}
 	
 	static TexturePagesToArray = function(_sorted = false) {
-		var _array = array_create(GetTexturePageCount());
+		var _array = array_create(GetTextureCount());
 		var _i = 0;
 		repeat(array_length(_array)) {
 			_array[_i] = GetTexturePage(_i);

@@ -23,7 +23,10 @@ repeat(array_length(_images)) {
 	++_i;
 }	
 
-texPage.SaveAsPNGs("data/");
+texPageStatic = texPage.ToStatic(true);
+sprites = texPageStatic.GetSprites();
+show_debug_overlay(true, true);
+//texPage.SaveAsPNGs("data/");
 
 //show_debug_message(json_stringify(texPage.ExportData(), true));
 //show_debug_message(texPage.ToJSON(true));

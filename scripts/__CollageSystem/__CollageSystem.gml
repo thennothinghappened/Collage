@@ -46,6 +46,7 @@ function __CollageSystem() {
 				__CollageAsyncList = [];
 				__CollageTPLoadedList = ds_list_create();
 				__CollageStaticCache = [];
+				__CollageSurfaceSaveCallback = surface_save;
 				
 				var _i = 0;
 				try {

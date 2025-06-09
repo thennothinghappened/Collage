@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"CollageStaticSurfaceSetSave",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"CollageStaticSurfaceSetSave",
+  "parent":{
+    "name":"General",
+    "path":"folders/Collage/General.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

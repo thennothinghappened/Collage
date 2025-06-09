@@ -74,6 +74,8 @@
     {"name":"CollageRenderPipeline","order":9,"path":"scripts/CollageRenderPipeline/CollageRenderPipeline.yy",},
     {"name":"CollageRestoreGPUState","order":12,"path":"scripts/CollageRestoreGPUState/CollageRestoreGPUState.yy",},
     {"name":"CollageStaticCacheClear","order":16,"path":"scripts/CollageStaticCacheClear/CollageStaticCacheClear.yy",},
+    {"name":"CollageStaticSurfaceGetSave","order":18,"path":"scripts/CollageStaticSurfaceGetSave/CollageStaticSurfaceGetSave.yy",},
+    {"name":"CollageStaticSurfaceSetSave","order":17,"path":"scripts/CollageStaticSurfaceSetSave/CollageStaticSurfaceSetSave.yy",},
     {"name":"CollageSterlizeGPUState","order":13,"path":"scripts/CollageSterlizeGPUState/CollageSterlizeGPUState.yy",},
     {"name":"CollageTextureFlush","order":14,"path":"scripts/CollageTextureFlush/CollageTextureFlush.yy",},
     {"name":"draw_image_ext","order":1,"path":"scripts/draw_image_ext/draw_image_ext.yy",},
