@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "CollageImageGetTexture",
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "Image",
-    "path": "folders/Collage/Image.yy",
+  "$GMScript":"v1",
+  "%Name":"CollageImageGetTexture",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"CollageImageGetTexture",
+  "parent":{
+    "name":"Image",
+    "path":"folders/Collage/Image.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

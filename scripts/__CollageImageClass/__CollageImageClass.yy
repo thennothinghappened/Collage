@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "__CollageImageClass",
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "Classes",
-    "path": "folders/Collage/System/Classes.yy",
+  "$GMScript":"v1",
+  "%Name":"__CollageImageClass",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__CollageImageClass",
+  "parent":{
+    "name":"Classes",
+    "path":"folders/Collage/System/Classes.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

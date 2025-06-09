@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "CollageIsPowerTwo",
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "General",
-    "path": "folders/Collage/General.yy",
+  "$GMScript":"v1",
+  "%Name":"CollageIsPowerTwo",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"CollageIsPowerTwo",
+  "parent":{
+    "name":"General",
+    "path":"folders/Collage/General.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

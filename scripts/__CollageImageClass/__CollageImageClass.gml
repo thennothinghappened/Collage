@@ -1,6 +1,6 @@
 /// @ignore
 /// feather ignore all
-function __CollageImageClass(_spriteStruct, _name, _cropW, _cropH, _tiling, _ratio, _xOffset, _yOffset) constructor {
+function __CollageImageClass(_spriteStruct, _name, _cropW, _cropH, _tiling, _ratio, _xOffset, _yOffset, _hashes) constructor {
 	__width = _spriteStruct.spriteInfo.width;
 	__height  = _spriteStruct.spriteInfo.height;
 	__cropWidth = _cropW;
@@ -9,15 +9,41 @@ function __CollageImageClass(_spriteStruct, _name, _cropW, _cropH, _tiling, _rat
 	__yoffset = _yOffset;
 	__name = _name;
 	__subImagesCount = _spriteStruct.spriteInfo.num_subimages;
-	__subImagesArray = array_create(__subImagesCount);
+	__subImagesArray = array_create(__subImagesCount, undefined);
 	__ratio = _ratio;
     __scaled = 1/_ratio;
 	__tiling = _tiling;
 	__speed = _spriteStruct.spriteData.__speed;
 	__speedType = _spriteStruct.spriteData.__speedType;
+	__hashes = _hashes;
 	
 	static __InternalGetUvs = function(_imageIndex) {
 		return __subImagesArray[_imageIndex % __subImagesCount];
+	}
+	
+	static ExportData = function() {
+		var _data = { 
+			width: __width,
+			height: __height,
+			cropWidth: __cropWidth,
+			cropHeight: __cropHeight,
+			xoffset: __xoffset,
+			yoffset: __yoffset,
+			tiling: __tiling,
+			name: __name,
+			framesCount: __subImagesCount,
+			ratio: __ratio,
+			scaled: __scaled,
+			speed: __speed,
+			speedType: __speedType,
+			uvs: array_create(__subImagesCount),
+			hashes: __hashes,
+		};
+		
+		for(var _i = 0; _i < __subImagesCount; ++_i) {
+			_data.uvs[_i] = GetUVs(_i).ExportData();
+		}
+		return _data;
 	}
     
     static SetXOffset = function(_value) {
@@ -110,8 +136,13 @@ function __CollageImageClass(_spriteStruct, _name, _cropW, _cropH, _tiling, _rat
 		return __subImagesArray[_imageIndex % __subImagesCount].texturePageStruct;
 	}
 	
+	/// @deprecated
 	static GetCount = function() {
 		return __subImagesCount;	
+	}
+	
+	static GetFrameCount = function() {
+		return __subImagesCount;
 	}
 	
 	static SaveToFile = function(_index, _filename = GetName() + "_" + string(_index) + ".png") {

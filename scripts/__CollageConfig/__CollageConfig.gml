@@ -71,3 +71,9 @@
 
 // Enables verbose console output to aid with debugging.
 #macro __COLLAGE_VERBOSE false
+
+// Whether Collage should utilize hashing in order to determine if two images are the same.
+#macro __COLLAGE_USE_HASHES false
+
+// The default state of a Collage instance with hashing, if hashes are on
+#macro __COLAGE_DEFAULT_HASH_STATE true

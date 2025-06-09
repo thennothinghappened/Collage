@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "draw_image",
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "GM-Collage Compatibility",
-    "path": "folders/Collage/GM-Collage Compatibility.yy",
+  "$GMScript":"v1",
+  "%Name":"draw_image",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"draw_image",
+  "parent":{
+    "name":"GM-Collage Compatibility",
+    "path":"folders/Collage/GM-Collage Compatibility.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

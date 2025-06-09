@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "CollageDrawImageTiledExt",
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "Rendering",
-    "path": "folders/Collage/Rendering.yy",
+  "$GMScript":"v1",
+  "%Name":"CollageDrawImageTiledExt",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"CollageDrawImageTiledExt",
+  "parent":{
+    "name":"Rendering",
+    "path":"folders/Collage/Rendering.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

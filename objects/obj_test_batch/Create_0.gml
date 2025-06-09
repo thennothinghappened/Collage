@@ -1,5 +1,10 @@
-texPage = new Collage(,,,,,false);
+texPage = new Collage("Test",,,,,false);
 texPage.StartBatch();
+texPage.AddFile("spr_soldier_copy.png", "Bob", 4, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER).SetTiling(true, true);
+texPage.AddFile("spr_soldier_copy.png", "Bob2", 4, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER).SetTiling(true, true);
+texPage.AddFile("IMAGE_NORMAL.png",, 1, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER).SetTiling(true, true);
+texPage.AddFile("IMAGE_WITH_SPACE.png",, 1, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER).SetTiling(true, true);
+texPage.AddFile("IMAGE_WITH_SPACE2.png",, 1, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER).SetTiling(true, true);
 var _file = file_find_first("*.png", 0);
 var _i = 0;
 while (_file != "") {
@@ -17,3 +22,26 @@ repeat(array_length(_images)) {
 	pos[_i] = {image: _images[_i], x: random(room_width-128), y: random(room_height-128)};
 	++_i;
 }	
+
+texPage.SaveAsPNGs("data/");
+
+//show_debug_message(json_stringify(texPage.ExportData(), true));
+//show_debug_message(texPage.ToJSON(true));
+//texPage.SaveAsPNGs("TestFolder");
+/*call_later(5, time_source_units_seconds, function() {
+	texPageStatic = texPage.ToStatic(true);
+	sprites = texPageStatic.GetSprites();
+	sprite_index = sprites[0];
+	show_debug_message("Static page generated!");
+	call_later(5, time_source_units_seconds, function() {
+		show_debug_message("Dynamic page destroyed!");
+		texPage.Destroy();
+	});
+});
+show_debug_overlay(true);
+/*
+var _i = 0;
+repeat(array_length(sprites)) {
+	show_debug_message($"{sprite_get_name(sprites[_i])} {sprite_get_xoffset(sprites[_i])} {sprite_get_yoffset(sprites[_i])}");
+	++_i;	
+}

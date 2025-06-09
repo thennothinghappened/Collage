@@ -27,6 +27,8 @@ function CollageSterlizeGPUState() {
 	_instance.matrixView =				matrix_get(matrix_view);
 	_instance.matrixProj =				matrix_get(matrix_projection);
 	_instance.shader =					shader_current();
+	_instance.blendEquation =			gpu_get_blendequation_sepalpha();
+	_instance.stencilEnable	=			gpu_get_stencil_enable();
 	
 	// Change GPU settings
 	static _matrixDefault = matrix_build_identity();
@@ -47,5 +49,7 @@ function CollageSterlizeGPUState() {
 	matrix_set(matrix_world, _matrixDefault);
 	matrix_set(matrix_view, _matrixDefault);
 	matrix_set(matrix_projection, _matrixDefault);
+	gpu_set_stencil_enable(false);
+	gpu_set_blendequation(bm_eq_add);
 	shader_reset();
 }

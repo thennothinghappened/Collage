@@ -24,8 +24,12 @@ enum CollageRPStatus {
 	BATCHED
 }
 
+#macro __COLLAGE_IS_DESKTOP ((os_type == os_windows) || (os_type == os_macosx) || (os_type == os_linux))
+#macro __COLLAGE_IS_MOBILE ((os_type == os_android) || (os_type == os_ios))
+#macro __COLLAGE_IS_CONSOLE ((os_type == os_switch) || (os_type == os_xboxseriesxs) || (os_type == os_ps4) || (os_type == os_ps5))
+
 #macro __COLLAGE_CREDITS "@TabularElf - https://tabelf.link/"
-#macro __COLLAGE_VERSION "v0.5.0"
+#macro __COLLAGE_VERSION "v1.0.0"
 show_debug_message("Collage " + __COLLAGE_VERSION + " Initalized! Created by " + __COLLAGE_CREDITS);
 
 /// @ignore
@@ -41,6 +45,7 @@ function __CollageSystem() {
 				__CollageGMSpriteCount = 0;
 				__CollageAsyncList = [];
 				__CollageTPLoadedList = ds_list_create();
+				__CollageStaticCache = [];
 				
 				var _i = 0;
 				try {
@@ -48,7 +53,7 @@ function __CollageSystem() {
 					var _sprites = asset_get_ids(asset_sprite);
 					repeat(array_length(_sprites)) {
 						// Skip sprites created/added on the fly
-						if (!string_count("__newsprite", sprite_get_name(_sprites[_i])) > 0) {
+						if (string_pos("__newsprite", sprite_get_name(_sprites[_i])) > 0) {
 							__CollageGMSpriteCount++;	
 						}
 						_i++;

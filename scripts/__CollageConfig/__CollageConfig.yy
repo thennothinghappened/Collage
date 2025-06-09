@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "__CollageConfig",
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "Collage",
-    "path": "folders/Collage.yy",
+  "$GMScript":"v1",
+  "%Name":"__CollageConfig",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__CollageConfig",
+  "parent":{
+    "name":"Collage",
+    "path":"folders/Collage.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

@@ -22,4 +22,26 @@ function __CollageImageUVsClass(_texPageStruct, _texPageNum, _left, _top, _right
 	yPos = _yOffset-_trimTop;
 	texturePageNum = _texPageNum;
 	texturePageStruct = _texPageStruct;
+	
+	static ExportData = function() {
+		return {
+			left,
+			right,
+			top,
+			bottom,
+			trimLeft,
+			trimTop,
+			normLeft,
+			normRight,
+			normTop,
+			normBottom,
+			normWidth,
+			normHeight,
+			originalWidth,
+			originalHeight,
+			xPos,
+			yPos,
+			tp: texturePageNum,
+		};
+	}
 }

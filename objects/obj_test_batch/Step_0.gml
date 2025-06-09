@@ -1,4 +1,8 @@
 if (keyboard_check_released(vk_space)) {
+	texPageStatic.Unload();
+}
+
+/*if (keyboard_check_released(vk_space)) {
 	texPage = new Collage(,,,,,false);
 	texPage.StartBatch();
 	var _file = file_find_first("*.png", 0);

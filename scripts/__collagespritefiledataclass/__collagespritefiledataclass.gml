@@ -18,7 +18,7 @@ function __CollageSpriteFileDataClass(_identifier, _spriteID, _subImage = 1, _is
 	__colour = c_white;
 	__alpha = 1;
 	__priority = -1;
-	__speed = 0;
+	__speed = 1;
 	__speedType = 0;
 	
 	static SetClump = function(_bool) {
@@ -30,10 +30,17 @@ function __CollageSpriteFileDataClass(_identifier, _spriteID, _subImage = 1, _is
 		var _origin = __CollageOriginValidator(__spriteID, _xOrigin, _yOrigin);
 		__xOrigin = _origin[0];
 		__yOrigin = _origin[1];
+		sprite_set_offset(__spriteID, __xOrigin, __yOrigin);
 		return self;
 	}
 	
+	/// @deprecated
 	static Set3D = function(_bool) {
+		__is3D = _bool;
+		return self;
+	}
+	
+	static SetSeparateTexture = function(_bool) {
 		__is3D = _bool;
 		return self;
 	}
@@ -44,7 +51,7 @@ function __CollageSpriteFileDataClass(_identifier, _spriteID, _subImage = 1, _is
 	}
 	
 	static SetTiling = function(_horizontal, _vertical) {
-		__tiling = (_horizontal << 1) | _vertical;
+		__tiling = (_horizontal << 8) | _vertical;
 		return self;
 	}
 	

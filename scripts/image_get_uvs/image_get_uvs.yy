@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "image_get_uvs",
-  "isDnD": false,
-  "isCompatibility": false,
-  "parent": {
-    "name": "GM-Collage Compatibility",
-    "path": "folders/Collage/GM-Collage Compatibility.yy",
+  "$GMScript":"v1",
+  "%Name":"image_get_uvs",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"image_get_uvs",
+  "parent":{
+    "name":"GM-Collage Compatibility",
+    "path":"folders/Collage/GM-Collage Compatibility.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

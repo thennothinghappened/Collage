@@ -26,6 +26,11 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 	__crop = _crop;
 	__optimize = _optimize;
 	__name = is_undefined(_identifier) ? _identifier : string(_identifier);
+	__id = (date_current_datetime() ^ get_timer());
+	__recent = [];
+	__useHash = __COLLAGE_USE_HASHES ? __COLAGE_DEFAULT_HASH_STATE : false;
+	
+	__destroyed = false;
 	
 	array_push(__system.__CollageTexturePagesList, self);
 	if (is_string(_identifier)) {
@@ -51,6 +56,24 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 	
 	static __getName = function() {
 		return (is_undefined(__name)) ? "" : __name + " - ";	
+	}
+	
+	static SetHashing = function(_value) {
+		if (!__COLLAGE_USE_HASHES) return __CollageThrow("Hashing is not enabled! Please ensure that \"__COLLAGE_USE_HASHES\" is checked in \"__CollageConfig\"!");
+		__useHash = _value;
+		return self;
+	}
+	
+	static GetHashing = function() {
+		return __useHash;
+	}
+	
+	static GetWidth = function() {
+		return __width;
+	}
+	
+	static GetHeight = function() {
+		return __height;
 	}
 	
 	#region Batching
@@ -113,7 +136,7 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 			exit;
 		}
 		
-		var _spriteData = new __CollageSpriteFileDataClass(_identifier, _spriteID, _subImage).SetOrigin(_xOrigin, _yOrigin).Set3D(_is3D);
+		var _spriteData = new __CollageSpriteFileDataClass(_identifier, _spriteID, _subImage).SetOrigin(_xOrigin, _yOrigin).SetSeparateTexture(_is3D);
 		
 		if (__CollageFileFromWeb(_fileName)) {
 			if (__COLLAGE_VERBOSE) __CollageTrace("Adding " + string(_fileName) + " to asynchronous listing...");
@@ -160,7 +183,7 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 		// Add sprite data
 		var _spriteData = new __CollageSpriteFileDataClass(_identifier, _spriteID, sprite_get_number(_spriteID), _isCopyValue)
 			.SetOrigin(_xOrigin, _yOrigin)
-			.Set3D(_is3D)
+			.SetSeparateTexture(_is3D)
 			.SetSpeed(sprite_get_speed(_spriteIdentifier))
 			.SetSpeedType(sprite_get_speed_type(_spriteIdentifier));
 		
@@ -190,7 +213,7 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 			exit;
 		}
 		
-		var _spriteData = new __CollageSpriteFileDataClass(_identifier, _spriteSheet).Set3D(_is3D);
+		var _spriteData = new __CollageSpriteFileDataClass(_identifier, _spriteSheet).SetSeparateTexture(_is3D);
 		
 		if (__CollageFileFromWeb(_fileName)) {
 			if (__COLLAGE_VERBOSE) __CollageTrace("Adding " + string(_fileName) + " to asynchronous listing...");
@@ -271,7 +294,7 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 		var _identifier = _identifierString ?? "surface" + string(_surface);	
 		// Add sprite data
 		
-		var _spriteData = new __CollageSpriteFileDataClass(_identifier, _spriteID, 1).SetOrigin(_xOrigin, _yOrigin).Set3D(_is3D);
+		var _spriteData = new __CollageSpriteFileDataClass(_identifier, _spriteID, 1).SetOrigin(_xOrigin, _yOrigin).SetSeparateTexture(_is3D);
 		
 		array_push(__batchImageList, _spriteData);
 		
@@ -320,7 +343,7 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 				++_j;
 			}
 			var _name = (string_count("{{name}}", _imageStruct[0]) > 0) ? string_replace_all(_imageStruct[0], "{{name}}", _identifierString) : _identifierString + _imageStruct[0];
-			var _spriteData = new __CollageSpriteFileDataClass(_name, _newSprite, _subImages).SetOrigin(_xOrigin, _yOrigin).Set3D(_is3D);
+			var _spriteData = new __CollageSpriteFileDataClass(_name, _newSprite, _subImages).SetOrigin(_xOrigin, _yOrigin).SetSeparateTexture(_is3D);
 			array_push(__batchImageList, _spriteData);
 			array_push(_imageArray, _spriteData);
 			_newSprite = -1;
@@ -340,6 +363,7 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 	#endregion
 	
 	static Clear = function() {
+		if (__destroyed) return;
 		var _i = 0;
 		repeat(array_length(__texPageArray)) {
 			__texPageArray[_i++].Free();	
@@ -377,8 +401,17 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 		return undefined;
 	}
 	
+	/// @Deprecated
 	static GetCount = function() {
+		return GetTextureCount();
+	}
+	
+	static GetTextureCount = function() {
 		return __texPageCount;
+	}
+	
+	static GetImageCount = function() {
+		return array_length(__imageList);
 	}
 		
 	static FlushPages = function() {
@@ -410,6 +443,7 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 	}
 	
 	static Destroy = function() {
+		if (__destroyed) return;
 		Clear();
 		var _i = 0;
 		repeat(array_length(__system.__CollageTexturePagesList)) {
@@ -428,6 +462,7 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 		__imageList = undefined;
 		__imageMap = undefined;
 		__texPageArray = undefined;
+		__destroyed = true;
 	}
 	
 	/// @return {Struct.__CollageImageClass} collage_image
@@ -440,6 +475,19 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 		var _i = 0;
 		repeat(array_length(_array)) {
 			_array[_i] = __imageList[_i];
+			++_i;
+		}
+		if (_sorted) {
+			array_sort(_array, true);	
+		}
+		return _array;
+	}
+	
+	static TexturePagesToArray = function(_sorted = false) {
+		var _array = array_create(GetTexturePageCount());
+		var _i = 0;
+		repeat(array_length(_array)) {
+			_array[_i] = GetTexturePage(_i);
 			++_i;
 		}
 		if (_sorted) {
@@ -467,6 +515,76 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 		repeat(_len) {
 			__texPageArray[_i++].__CacheTexture();
 		}
+	}
+	
+	static __GetId = function() {
+		return __id;
+	}
+	
+	static GetName = function() {
+		return __name;
+	}
+	
+	static ToStatic = function(_prefetch = false, _removeSelf = false) {
+		var _element = new __CollageStaticGroupClass(self, _prefetch, _removeSelf);
+		return _element;
+	}
+	
+	static ExportData = function() {
+		var _data = {
+			separation: __separation,
+			crop: __crop,
+			width: __width,
+			height: __height,
+			optimize: __optimize,
+			texturePages: array_create(__texPageCount, undefined),
+			images: array_create(__imageCount, undefined),
+			name: __name,
+			id: __id,
+		};
+		
+		for(var _i = 0; _i < __imageCount; ++_i) {
+			_data.images[_i] = __imageList[_i].ExportData();
+		}
+		
+		for(var _i = 0; _i < __texPageCount; ++_i) {
+			var _texPage = GetTexturePage(_i);
+			_data.texturePages[_i] = {
+				width: _texPage.GetWidth(),
+				height: _texPage.GetHeight(),
+			};
+		}
+		
+		return _data;
+	}
+	
+	static GetRecent = function() {
+		return __recent;
+	}
+	
+	static ToJSON = function(_pretty = false) {
+		return json_stringify(ExportData(), _pretty);
+	}
+	
+	static SaveAsPNGs = function(_filepath, _pretty = false) {
+		var _json = ExportData();
+		var _len = array_length(_json.texturePages);
+		for(var _i = 0; _i < _len; ++_i) {
+			_json.texturePages[_i].filename = $"{__name}_{_i}.png";
+		}
+		
+		_json = json_stringify(_json, _pretty);
+		
+		for(var _i = 0; _i < __texPageCount; ++_i) {
+			var _texPage = GetTexturePage(_i);
+			_texPage.CheckSurface();
+			surface_save(_texPage.GetSurface(), $"{_filepath}/{__name}_{_i}.png");
+		}
+		
+		var _buff = buffer_create(string_byte_length(_json), buffer_fixed, 1);
+		buffer_write(_buff, buffer_text, _json);
+		buffer_save(_buff, $"{_filepath}/{__name}.json");
+		buffer_delete(_buff);
 	}
 	#endregion 	
 	
