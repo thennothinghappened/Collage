@@ -525,8 +525,27 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 		return __name;
 	}
 	
+	static ToStaticBuilder = function(_prefetch = false, _removeSelf = false) {
+		return new __CollageStaticGroupBuilderClass(self, _prefetch, _removeSelf);
+	}
+	
 	static ToStatic = function(_prefetch = false, _removeSelf = false) {
-		var _element = new __CollageStaticGroupClass(self, _prefetch, _removeSelf);
+		// This function is mainly used for 
+		var _texturePages = TexturePagesToArray();
+		var _texturePagesCount = GetTextureCount();
+		var _name = GetName();
+		
+		var _paths = array_create(_texturePagesCount);
+		// Save Pages
+		for(var _i = 0; _i < _texturePagesCount; ++_i) {
+			var _filepath = $"{__COLLAGE_DEFAULT_SAVE_FILEPATH}{_name}_{_i}.png";
+			_paths[_i] = _filepath;
+			_texturePages[_i].CheckSurface();
+			var _surf = _texturePages[_i].GetSurface();
+			surface_save(_surf, _filepath);
+		}
+	
+		var _element = new __CollageStaticGroupClass(self, _paths, _texturePagesCount, _prefetch, _removeSelf);
 		return _element;
 	}
 	

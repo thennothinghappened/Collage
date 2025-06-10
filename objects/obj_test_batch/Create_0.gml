@@ -1,10 +1,10 @@
 texPage = new Collage("Test",,,,,false);
 texPage.StartBatch();
-texPage.AddFile("spr_soldier_copy.png", "Bob", 4, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER).SetTiling(true, true);
-texPage.AddFile("spr_soldier_copy.png", "Bob2", 4, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER).SetTiling(true, true);
-texPage.AddFile("IMAGE_NORMAL.png",, 1, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER).SetTiling(true, true);
-texPage.AddFile("IMAGE_WITH_SPACE.png",, 1, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER).SetTiling(true, true);
-texPage.AddFile("IMAGE_WITH_SPACE2.png",, 1, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER).SetTiling(true, true);
+texPage.AddFile("spr_soldier_copy.png", "Bob", 4, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER);
+texPage.AddFile("spr_soldier_copy.png", "Bob2", 4, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER);
+texPage.AddFile("IMAGE_NORMAL.png",, 1, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER);
+texPage.AddFile("IMAGE_WITH_SPACE.png",, 1, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER);
+texPage.AddFile("IMAGE_WITH_SPACE2.png",, 1, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER);
 var _file = file_find_first("*.png", 0);
 var _i = 0;
 while (_file != "") {
@@ -23,7 +23,11 @@ repeat(array_length(_images)) {
 	++_i;
 }	
 
-texPageStatic = texPage.ToStatic(true);
+texPageStatic = texPage.ToStaticBuilder();
+var _path = $".collage/{texPageStatic.GetName()}_0.png";
+surface_save(texPageStatic.NextPage().GetSurface(), _path);
+texPageStatic.AddPath(_path);
+texPageStatic = texPageStatic.Finalize();
 sprites = texPageStatic.GetSprites();
 show_debug_overlay(true, true);
 //texPage.SaveAsPNGs("data/");

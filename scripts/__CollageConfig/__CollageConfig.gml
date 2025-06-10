@@ -77,3 +77,6 @@
 
 // The default state of a Collage instance with hashing, if hashes are on
 #macro __COLAGE_DEFAULT_HASH_STATE true
+
+// What filepath Collage should save to by default for .ToStatic()
+#macro __COLLAGE_DEFAULT_SAVE_FILEPATH (temp_directory + ".collage/")

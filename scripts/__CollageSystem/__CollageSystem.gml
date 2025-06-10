@@ -45,7 +45,6 @@ function __CollageSystem() {
 				__CollageGMSpriteCount = 0;
 				__CollageAsyncList = [];
 				__CollageTPLoadedList = ds_list_create();
-				__CollageStaticCache = [];
 				
 				var _i = 0;
 				try {

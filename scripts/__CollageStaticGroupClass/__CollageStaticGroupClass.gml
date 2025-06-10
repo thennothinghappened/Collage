@@ -1,24 +1,9 @@
-function __CollageStaticGroupClass(_collageInstance, _prefetch = false, _removeSelf = false) constructor {
-	static _cache = __CollageSystem().__CollageStaticCache;
+function __CollageStaticGroupClass(_collageInstance, _paths, _texturePagesCount, _prefetch = false, _removeSelf = false) constructor {
 	static _global = __CollageSystem();
 
 	#region Processing
 	var _images = _collageInstance.ImagesToArray();
-	var _texturePages = _collageInstance.TexturePagesToArray();
-	var _texturePagesCount = _collageInstance.GetTextureCount();
 	var _name = _collageInstance.GetName();
-	
-	var _texturePagesAsSprites = array_create(_texturePagesCount);
-	var _paths = array_create(_texturePagesCount);
-	// Save Pages
-	for(var _i = 0; _i < _texturePagesCount; ++_i) {
-		var _filepath = $"{temp_directory}.collage/{_name}_{_i}.png";
-		_paths[_i] = _filepath;
-		_texturePages[_i].CheckSurface();
-		var _surf = _texturePages[_i].GetSurface();
-		surface_save(_surf, _filepath);
-		array_push(_cache, _filepath);
-	}
 	
 	// Generate sprite metadata
 	var _spriteData = {};
@@ -119,6 +104,11 @@ function __CollageStaticGroupClass(_collageInstance, _prefetch = false, _removeS
 	
 	static GetPaths = function() {
 		return variable_clone(__paths);
+	}
+	
+	static ClearFiles = function() {
+		array_foreach(__paths, file_delete);
+		array_resize(__paths, 0);
 	}
 	
 	static GetStatus = function() {
