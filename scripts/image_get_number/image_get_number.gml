@@ -3,7 +3,7 @@
 /// feather ignore all
 function image_get_number(_image) {
 	if (CollageIsImage(_image)) {
-	    return CollageImageGetInfo(_image).GetFrameCount();
+	    return _image.GetFrameCount();
 	}
 	
 	return sprite_get_number(_image);

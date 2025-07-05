@@ -3,7 +3,7 @@
 /// feather ignore all
 function image_get_yoffset(_image) {
 	if (CollageIsImage(_image)) {
-	    return CollageImageGetInfo(_image).GetYOffset();   
+	    return _image.GetYOffset();   
 	}
 	
 	return sprite_get_yoffset(_image);

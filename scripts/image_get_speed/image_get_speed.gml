@@ -3,7 +3,7 @@
 /// feather ignore all
 function image_get_speed(_image) {
 	if (CollageIsImage(_image)) {
-	    return CollageImageGetInfo(_image).GetSpeed();
+	    return _image.GetSpeed();
 	}
 	
 	return sprite_get_speed(_image);

@@ -3,7 +3,7 @@
 /// feather ignore all
 function image_get_xoffset(_image) {	
 	if (CollageIsImage(_image)) {
-	    return CollageImageGetInfo(_image).GetXOffset();   
+	    return _image.GetXOffset();   
 	}
 	
 	return sprite_get_xoffset(_image);

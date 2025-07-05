@@ -3,7 +3,7 @@
 /// feather ignore all
 function image_get_height(_image) {
     if (CollageIsImage(_image)) {
-        return CollageImageGetInfo(_image).GetWidth();
+        return _image.GetHeight();
     }
     
     return sprite_get_width(_image);

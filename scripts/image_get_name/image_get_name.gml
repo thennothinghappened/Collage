@@ -3,7 +3,7 @@
 /// feather ignore all
 function image_get_name(_image) {
 	if (CollageIsImage(_image)) {
-	    return CollageImageGetInfo(_image).GetName();   
+	    return _image.GetName();   
 	}
 	
 	return sprite_get_name(_image);

@@ -4,7 +4,7 @@
 /// feather ignore all
 function image_get_texture(_image, _index) {
 	if (CollageIsImage(_image)) {
-	    return CollageImageGetInfo(_image).GetTexture(_index);
+	    return _image.GetTexture(_index);
 	}
 	
 	return sprite_get_texture(_image, _index);
