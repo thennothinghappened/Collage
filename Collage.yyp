@@ -73,6 +73,7 @@
     {"$GMIncludedFile":"","%Name":"spr_soldier_copy.png","CopyToMask":-1,"filePath":"datafiles","name":"spr_soldier_copy.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"spr_soldier_long.png","CopyToMask":-1,"filePath":"datafiles","name":"spr_soldier_long.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"spr_soldier_strip4.png","CopyToMask":-1,"filePath":"datafiles","name":"spr_soldier_strip4.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"spr_soldier_vertical.png","CopyToMask":-1,"filePath":"datafiles","name":"spr_soldier_vertical.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"spr_soldier.png","CopyToMask":-1,"filePath":"datafiles","name":"spr_soldier.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"station.png","CopyToMask":-1,"filePath":"datafiles","name":"station.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"suv_closed.png","CopyToMask":-1,"filePath":"datafiles","name":"suv_closed.png","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
@@ -112,7 +113,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.1400.0.841",
+    "IDEVersion":"2024.1400.0.849",
   },
   "name":"Collage",
   "resources":[

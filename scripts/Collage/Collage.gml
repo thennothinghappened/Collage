@@ -249,31 +249,56 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 		var _spriteSheet = _spriteData.__spriteID;
 		var _width = sprite_get_width(_spriteSheet);
 		var _height = sprite_get_height(_spriteSheet);
-		var _offset = round(_width / _height);
 		var _surf = -1;
 		var _subImages = 1;
-		if (_offset != 0) {
-		_width = _height;
+		var _offset = _width > _height ? round(_width / _height) : round(_height / _width);
 		
-		_subImages = _offset;
-		var _i = 0;
-		_surf = surface_create(_width, _height);
-		var _sprite = -1;
-		
-		CollageSterlizeGPUState();
-			repeat(_offset) {
-				surface_set_target(_surf);
-				draw_clear_alpha(0, 0);
-				draw_sprite_part(_spriteSheet, 0, _i*_width, 0, _width, _height, 0, 0);
-				surface_reset_target();
-				++_i;
-				if (!sprite_exists(_sprite)) {
-					_sprite = sprite_create_from_surface(_surf, 0, 0, _width, _height, _removeBack, _smooth, _xOrigin, _yOrigin);	
-				} else {
-					sprite_add_from_surface(_sprite, _surf, 0, 0, _width, _height, _removeBack, _smooth);
+		if (_offset > 1) {
+			if (_width > _height) {
+				_width = _height;
+			
+				_subImages = _offset;
+				var _i = 0;
+				_surf = surface_create(_width, _height);
+				var _sprite = -1;
+				
+				CollageSterlizeGPUState();
+				repeat(_offset) {
+					surface_set_target(_surf);
+					draw_clear_alpha(0, 0);
+					draw_sprite_part(_spriteSheet, 0, _i*_width, 0, _width, _height, 0, 0);
+					surface_reset_target();
+					++_i;
+					if (!sprite_exists(_sprite)) {
+						_sprite = sprite_create_from_surface(_surf, 0, 0, _width, _height, _removeBack, _smooth, _xOrigin, _yOrigin);	
+					} else {
+						sprite_add_from_surface(_sprite, _surf, 0, 0, _width, _height, _removeBack, _smooth);
+					}
 				}
+				CollageRestoreGPUState();	
+			} else {
+				_height = _width;
+			
+				_subImages = _offset;
+				var _i = 0;
+				_surf = surface_create(_width, _height);
+				var _sprite = -1;
+				
+				CollageSterlizeGPUState();
+				repeat(_offset) {
+					surface_set_target(_surf);
+					draw_clear_alpha(0, 0);
+					draw_sprite_part(_spriteSheet, _height, 0, _i*_height, _width, _height, 0, 0);
+					surface_reset_target();
+					++_i;
+					if (!sprite_exists(_sprite)) {
+						_sprite = sprite_create_from_surface(_surf, 0, 0, _width, _height, _removeBack, _smooth, _xOrigin, _yOrigin);	
+					} else {
+						sprite_add_from_surface(_sprite, _surf, 0, 0, _width, _height, _removeBack, _smooth);
+					}
+				}
+				CollageRestoreGPUState();
 			}
-			CollageRestoreGPUState();
 		} else {
 			_sprite = sprite_duplicate(_spriteSheet);	
 		}

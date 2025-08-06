@@ -5,7 +5,7 @@ texPage.AddFile("spr_soldier_copy.png", "Bob2", 4, false, false, CollageOrigin.C
 texPage.AddFile("IMAGE_NORMAL.png",, 1, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER);
 texPage.AddFile("IMAGE_WITH_SPACE.png",, 1, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER);
 texPage.AddFile("IMAGE_WITH_SPACE2.png",, 1, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER);
-var _file = file_find_first("*.png", 0);
+var _file = file_find_first("*.png", fa_none);
 var _i = 0;
 while (_file != "") {
 	texPage.AddFile(_file,, 1, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER);	
