@@ -35,7 +35,6 @@ function CollageRestoreGPUState() {
 	matrix_set(matrix_view, _instance.matrixView);
 	matrix_set(matrix_projection, _instance.matrixProj);
 	gpu_set_blendequation_sepalpha(_instance.blendEquation);
-	gpu_set_scissor(_instance.gpuScissor);
 	gpu_set_depth(_instance.depth);
 	gpu_set_sprite_cull(_instance.spriteCull);
 	// Feather ignore once GM1009 

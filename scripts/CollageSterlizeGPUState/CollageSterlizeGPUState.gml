@@ -30,7 +30,6 @@ function CollageSterlizeGPUState() {
 	_instance.blendEquation =			gpu_get_blendequation_sepalpha();
 	_instance.stencilEnable	=			gpu_get_stencil_enable();
 	_instance.depth 		=			gpu_get_depth();
-	_instance.gpuScissor 	= 			gpu_get_scissor();
 	_instance.spriteCull	=			gpu_get_sprite_cull();
 	
 	// Change GPU settings
@@ -54,7 +53,6 @@ function CollageSterlizeGPUState() {
 	matrix_set(matrix_projection, _matrixDefault);
 	gpu_set_stencil_enable(false);
 	gpu_set_blendequation(bm_eq_add);
-	gpu_set_scissor(0, 0, window_get_width(), window_get_height());
 	gpu_set_depth(0);
 	gpu_set_sprite_cull(true);
 	shader_reset();
