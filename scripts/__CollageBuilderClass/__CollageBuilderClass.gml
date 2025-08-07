@@ -378,7 +378,7 @@ function __CollageBuilderClass() constructor {
 						spriteWidth: _sprWidth,
 						spriteHeight: _sprHeight,
 						xScale: _xScale,
-						yScale: _xScale,
+						yScale: _yScale,
 						ratio: _ratio,
 						bbWidth: _bbWidth + (_tiling[0] ? 2 : 0),
 						bbHeight: _bbHeight + (_tiling[1] ? 2 : 0),

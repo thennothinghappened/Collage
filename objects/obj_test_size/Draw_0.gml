@@ -1,0 +1,1 @@
+draw_image_ext(image, current_time / 1000, 64, 64, 4, 4, 0, c_white, 1);

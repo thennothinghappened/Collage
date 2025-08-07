@@ -10,7 +10,7 @@
     {"name":"obj_test_part","order":17,"path":"objects/obj_test_part/obj_test_part.yy",},
     {"name":"obj_test_premultiply_property","order":4,"path":"objects/obj_test_premultiply_property/obj_test_premultiply_property.yy",},
     {"name":"obj_test_priority_property","order":15,"path":"objects/obj_test_priority_property/obj_test_priority_property.yy",},
-    {"name":"obj_test_scale","order":21,"path":"objects/obj_test_scale/obj_test_scale.yy",},
+    {"name":"obj_test_size","order":21,"path":"objects/obj_test_size/obj_test_size.yy",},
     {"name":"obj_test_speed","order":22,"path":"objects/obj_test_speed/obj_test_speed.yy",},
     {"name":"obj_test_spritesheet","order":3,"path":"objects/obj_test_spritesheet/obj_test_spritesheet.yy",},
     {"name":"obj_test_stretched","order":10,"path":"objects/obj_test_stretched/obj_test_stretched.yy",},

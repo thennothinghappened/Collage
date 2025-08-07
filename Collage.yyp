@@ -128,7 +128,7 @@
     {"id":{"name":"obj_test_part","path":"objects/obj_test_part/obj_test_part.yy",},},
     {"id":{"name":"obj_test_premultiply_property","path":"objects/obj_test_premultiply_property/obj_test_premultiply_property.yy",},},
     {"id":{"name":"obj_test_priority_property","path":"objects/obj_test_priority_property/obj_test_priority_property.yy",},},
-    {"id":{"name":"obj_test_scale","path":"objects/obj_test_scale/obj_test_scale.yy",},},
+    {"id":{"name":"obj_test_size","path":"objects/obj_test_size/obj_test_size.yy",},},
     {"id":{"name":"obj_test_speed","path":"objects/obj_test_speed/obj_test_speed.yy",},},
     {"id":{"name":"obj_test_spritesheet","path":"objects/obj_test_spritesheet/obj_test_spritesheet.yy",},},
     {"id":{"name":"obj_test_stretched","path":"objects/obj_test_stretched/obj_test_stretched.yy",},},

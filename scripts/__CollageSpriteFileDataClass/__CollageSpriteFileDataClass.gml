@@ -20,25 +20,25 @@ function __CollageSpriteFileDataClass(_identifier, _spriteID, _subImage = 1, _is
 	__priority = -1;
 	__speed = 1;
 	__speedType = 0;
+	__width = sprite_get_width(__spriteID);
+	__height = sprite_get_height(__spriteID);
 	
-	static AddSurfaceAsFrame = function(_surf, _x, _y, _width, _height, _removeBack = false, _smooth = false) {
-			if (!__isCopy) {
-				if (__spriteID > __system.__CollageGMSpriteCount) {
-					__isCopy = true;
-					__spriteID = sprite_duplicate(__spriteID);
-				}
-			}
-			sprite_add_from_surface(__spriteID, _surf, _x, _y, _width, _height, _removeBack, _smooth);
-			return self;
-	}
-	
-	static AddSpriteAsFrame = function(_sprite, _removeBack = false, _smooth = false) {
+	static __HandleCopy = function() {
 		if (!__isCopy) {
 			if (__spriteID > __system.__CollageGMSpriteCount) {
 				__isCopy = true;
 				__spriteID = sprite_duplicate(__spriteID);
 			}
 		}
+	}
+	
+	static AddSurfaceAsFrame = function(_surf, _x, _y, _width, _height, _removeBack = false, _smooth = false) {
+			__HandleCopy();
+			sprite_add_from_surface(__spriteID, _surf, _x, _y, _width, _height, _removeBack, _smooth);
+			return self;
+	}
+	
+	static AddSpriteAsFrame = function(_sprite, _removeBack = false, _smooth = false) {
 		var _width = sprite_get_width(_sprite);
 		var _height = sprite_get_height(_sprite);
 		var _surf = surface_create();
@@ -90,6 +90,50 @@ function __CollageSpriteFileDataClass(_identifier, _spriteID, _subImage = 1, _is
 	static SetTiling = function(_horizontal, _vertical) {
 		__tiling = (_horizontal << 8) | _vertical;
 		return self;
+	}
+	
+	static SetSize = function(_width, _height, _linear = false) {
+		var _surf = surface_create(_width, _height);
+		var _oldSprite = __spriteID;
+		__spriteID = undefined;
+		CollageSterlizeGPUState();
+		var _i = 0;
+		gpu_set_tex_filter(_linear);
+		repeat(sprite_get_number(_oldSprite)) {
+			surface_set_target(_surf);
+			draw_clear_alpha(c_black, 0);
+			draw_sprite_stretched(_oldSprite, _i, 0, 0, _width, _height);
+			surface_reset_target();
+			if (is_undefined(__spriteID)) {
+				__spriteID = sprite_create_from_surface(_surf, 0, 0, _width, _height, false, false, __xOrigin, __yOrigin);
+			} else {
+				sprite_add_from_surface(__spriteID, _surf, 0, 0, _width, _height, false, false);
+			}
+			++_i;
+		}
+		CollageRestoreGPUState();
+		__width = _width;
+		__height = _height;
+		
+		if (__isCopy) {
+			sprite_delete(_oldSprite);
+		} 
+			
+		__isCopy = true;
+		return self;
+	}
+	
+	static SetScale = function(_xScale, _yScale, _linear = false) {
+		SetSize(GetWidth() * _xScale, GetHeight() * _yScale, _linear);
+		return self;
+	}
+	
+	static GetWidth = function() {
+		return __width;
+	}
+	
+	static GetHeight = function() {
+		return __height;
 	}
 	
 	static SetBlend = function(_col, _alpha) {

@@ -332,7 +332,7 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 		}
 	}
 	
-	static AddSpriteSheetSingle = function(_spriteID, _frames, _name, _x, _y, _width, _height, _horizontal = true, _removeBack = false, _smooth = false, _xOrigin = 0, _yOrigin = 0, _is3D = false) {
+	static AddSpriteSheetSingle = function(_spriteID, _frames, _name = undefined, _x, _y, _width, _height, _horizontal = true, _removeBack = false, _smooth = false, _xOrigin = 0, _yOrigin = 0, _is3D = false) {
 		if (_frames <= 0) {
 			__CollageThrow("Frames are negative! Got " + string(_frames) + ", expected 1 or more!");
 		}
