@@ -49,7 +49,7 @@ function __CollageSpriteFileDataClass(_identifier, _spriteID, _subImage = 1, _is
 			draw_clear_alpha(c_black, 0);
 			draw_sprite(_sprite, _i, 0, 0);
 			surface_reset_target();
-			AddSurfaceAsFrame(__spriteID, _surf, 0, 0, _width, _height, _removeBack, _smooth);
+			AddSurfaceAsFrame(_surf, 0, 0, _width, _height, _removeBack, _smooth);
 			++_i;
 		}
 		CollageRestoreGPUState();
