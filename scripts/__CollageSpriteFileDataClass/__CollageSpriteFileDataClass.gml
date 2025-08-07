@@ -21,6 +21,43 @@ function __CollageSpriteFileDataClass(_identifier, _spriteID, _subImage = 1, _is
 	__speed = 1;
 	__speedType = 0;
 	
+	static AddSurfaceAsFrame = function(_surf, _x, _y, _width, _height, _removeBack = false, _smooth = false) {
+			if (!__isCopy) {
+				if (__spriteID > __system.__CollageGMSpriteCount) {
+					__isCopy = true;
+					__spriteID = sprite_duplicate(__spriteID);
+				}
+			}
+			sprite_add_from_surface(__spriteID, _surf, _x, _y, _width, _height, _removeBack, _smooth);
+			return self;
+	}
+	
+	static AddSpriteAsFrame = function(_sprite, _removeBack = false, _smooth = false) {
+		if (!__isCopy) {
+			if (__spriteID > __system.__CollageGMSpriteCount) {
+				__isCopy = true;
+				__spriteID = sprite_duplicate(__spriteID);
+			}
+		}
+		var _width = sprite_get_width(_sprite);
+		var _height = sprite_get_height(_sprite);
+		var _surf = surface_create();
+		CollageSterlizeGPUState();
+		var _i = 0;
+		repeat(sprite_get_number(_sprite)) {
+			surface_set_target(_sprite);
+			draw_clear_alpha(c_black, 0);
+			draw_sprite(_sprite, _i, 0, 0);
+			surface_reset_target();
+			AddSurfaceAsFrame(__spriteID, _surf, 0, 0, _width, _height, _removeBack, _smooth);
+			++_i;
+		}
+		CollageRestoreGPUState();
+		
+		surface_free(_surf);
+		return self;
+	}
+	
 	static SetClump = function(_bool) {
 		__keepTogether = _bool;
 		return self;
