@@ -245,7 +245,7 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 		}
 	}
 	
-	static __InternalAddFileStrip = function(_spriteData, _removeBack = false, _smooth = false, _xOrigin, _yOrigin, _is3D) {	
+	static __InternalAddFileStrip = function(_spriteData, _removeBack, _smooth, _xOrigin, _yOrigin) {	
 		var _spriteSheet = _spriteData.__spriteID;
 		var _width = sprite_get_width(_spriteSheet);
 		var _height = sprite_get_height(_spriteSheet);
@@ -326,6 +326,61 @@ function Collage(_identifier = undefined, _width = __COLLAGE_DEFAULT_TEXTURE_SIZ
 		if (__state == CollageBuildStates.NORMAL) && (__status == CollageStatus.READY) {
 			__builder.__build();
 		}
+		
+		if (__state == CollageBuildStates.BATCHING) {
+			return _spriteData;	
+		}
+	}
+	
+	static AddSpriteSheetSingle = function(_spriteID, _frames, _name, _x, _y, _width, _height, _horizontal = true, _removeBack = false, _smooth = false, _xOrigin = 0, _yOrigin = 0, _is3D = false) {
+		if (_frames <= 0) {
+			__CollageThrow("Frames are negative! Got " + string(_frames) + ", expected 1 or more!");
+		}
+		
+		var _spriteWidth = sprite_get_width(_spriteID);
+		var _spriteHeight = sprite_get_height(_spriteID);
+		
+		var _maxFrames = (_spriteWidth div _width) * (_spriteHeight div _height);
+		if (_frames > _maxFrames) {
+			__CollageThrow("Frames exceed possible maximumm " + string(_frames) + ", expected 1 or more!");
+			return;
+		}
+
+		var _i = 0;
+		var _surf = surface_create(_width, _height);
+		var _newSprite = -1;
+		
+		CollageSterlizeGPUState();
+		var _i = 0;
+		var _offset = _width > _height ? _width : _height;
+		repeat(_frames) {
+			surface_set_target(_surf);
+			draw_clear_alpha(0, 0);
+			if (_horizontal) {
+				var _xPos = ((_x + _i)  mod _spriteWidth);
+				var _yPos = ((_y + _i) div _spriteHeight)*_height;
+			} else {
+				var _xPos = ((_x + _i)  div _spriteWidth)*_width;
+				var _yPos = ((_y + _i) mod _spriteHeight);	
+			}
+			draw_sprite_part(_spriteID, 0, _xPos, _yPos, _width, _height, 0, 0);
+			surface_reset_target();
+			if (!sprite_exists(_newSprite)) {
+				_newSprite = sprite_create_from_surface(_surf, 0, 0, _width, _height, _removeBack, _smooth, 0, 0);	
+			} else {
+				sprite_add_from_surface(_newSprite, _surf, 0, 0, _width, _height, _removeBack, _smooth);
+			}
+			_i += _offset;
+		}
+		
+		var _spriteData = new __CollageSpriteFileDataClass(_name, _newSprite, _frames).SetOrigin(_xOrigin, _yOrigin).SetSeparateTexture(_is3D);
+		array_push(__batchImageList, _spriteData);
+		CollageRestoreGPUState();
+		
+		if (__state == CollageBuildStates.NORMAL) {
+			__builder.__build();
+		}
+		surface_free(_surf);
 		
 		if (__state == CollageBuildStates.BATCHING) {
 			return _spriteData;	

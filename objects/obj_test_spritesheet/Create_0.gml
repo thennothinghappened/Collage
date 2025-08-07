@@ -1,4 +1,4 @@
-texPage = new Collage("Spritesheet",,, true);
+texPage = new Collage("Spritesheet", 256, 256, true);
 var _batSprite = sprite_add("bats.png", 1, false, false, 0, 0);
 var _array = [
 	CollageDefineSpriteSheet("spr_{{name}}_fly_down", 32, 0, 128, 32),
@@ -11,6 +11,9 @@ var _array = [
 	CollageDefineSpriteSheet("spr_{{name}}_dead_left", 0, 96, 32, 32),
 ];
 texPage.AddSpriteSheet(_batSprite, _array, "bat", 32, 32, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER);
+texPage.AddSpriteSheetSingle(_batSprite, 16, "spr_bat2_fly_down", 0, 0, 32, 32, true, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER);
+texPage.AddSpriteSheetSingle(_batSprite, 16, "spr_bat2_fly_up", 0, 0, 32, 32, false, false, false, CollageOrigin.CENTER, CollageOrigin.CENTER);
+
 sprite_delete(_batSprite);
 
 imageArray = texPage.ImagesToArray();
